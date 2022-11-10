@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@types/ramda": "^0.28.19",
     "@types/react": "^18.0.25",
     "@types/react-router": "^5.1.19"
   }
