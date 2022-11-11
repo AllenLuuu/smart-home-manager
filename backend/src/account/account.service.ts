@@ -13,14 +13,14 @@ export class AccountService {
     private readonly returnService: ReturnService,
   ) {}
 
-  async login(loginDto: LoginDto): Promise<ReturnDto<null>> {
+  async login(loginDto: LoginDto): Promise<string | null> {
     const account = await this.accountModel.findOne({ username: loginDto.username });
     if (account) {
       if (account.password === loginDto.password) {
-        return this.returnService.wrapReturn<null>(true, null);
+        return account.id;
       }
     }
-    return this.returnService.wrapReturn<null>(false, null, 10001);
+    return null;
   }
 
   async create(registerDto: RegisterDto): Promise<Account> {
