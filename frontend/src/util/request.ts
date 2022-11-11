@@ -1,5 +1,5 @@
 import axios from "axios";
-const R = require("ramda");
+import * as R from "ramda";
 
 const request = axios.create({
   baseURL: "http://localhost:3001",
@@ -8,6 +8,7 @@ const request = axios.create({
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
   },
+  withCredentials: true,
 });
 
 export const ping = async () => {
