@@ -7,12 +7,12 @@ import {
   VStack,
   HStack,
   Input,
+  Link,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import login from "../util/login";
 
 export default function Login() {
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,7 +33,7 @@ export default function Login() {
 
   return (
     <>
-      <Flex direction="column" height="100vh" justify="center">
+      <Flex direction="column" minHeight="100vh" justify="center" py="50px">
         <Center>
           <Heading as="h1" size="2xl" marginBottom={100}>
             智能家居管理系统
@@ -63,13 +63,20 @@ export default function Login() {
           />
         </VStack>
 
-        <HStack p="25px" spacing="50px">
-          <Button colorScheme="blue" size="lg" flexGrow="1" onClick={handleLogin}>
+        <HStack p="25px" mt={50} spacing="50px">
+          <Button
+            colorScheme="blue"
+            size="lg"
+            flexGrow="1"
+            onClick={handleLogin}
+          >
             登录
           </Button>
-          <Button colorScheme="blue" variant="outline" size="lg" flexGrow="1">
-            注册
-          </Button>
+          <Link href="/signup" flexGrow="1">
+            <Button colorScheme="blue" variant="outline" size="lg" w="100%">
+              注册
+            </Button>
+          </Link>
         </HStack>
       </Flex>
     </>
