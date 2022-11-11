@@ -60,6 +60,7 @@ export const post = async (url: string, data: Object, task?: string) => {
     )(ret);
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
+      showError(task ?? "上传", error.message);
       if (error.response) {
         // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
         console.log(error.response.data);
