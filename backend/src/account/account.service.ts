@@ -23,8 +23,17 @@ export class AccountService {
     return null;
   }
 
-  async create(registerDto: RegisterDto): Promise<Account> {
-    const createdAccount = new this.accountModel(registerDto);
-    return createdAccount.save();
+  async signUp(registerDto: RegisterDto): Promise<ReturnDto<any>> {
+    const checkUsername = await this.accountModel.findOne({ username: registerDto.username });
+    if (checkUsername) {
+      return this.returnService.wrapReturn(false, null, 10002);
+    }
+    const checkPhone = await this.accountModel.findOne({ phone: registerDto.phone });
+    if (checkPhone) {
+      return this.returnService.wrapReturn(false, null, 10003);
+    }
+
+    const createdAccount = await this.accountModel.create(registerDto);
+    return this.returnService.wrapReturn(true, createdAccount.id);
   }
 }

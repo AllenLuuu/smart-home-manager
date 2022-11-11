@@ -1,5 +1,5 @@
 import { Body, Controller, Post, Res } from '@nestjs/common';
-import { LoginDto } from './dto/account.dto';
+import { LoginDto, RegisterDto } from './dto/account.dto';
 import { AccountService } from './account.service';
 import { ReturnService } from 'src/return/return.service';
 import { Response } from 'express';
@@ -23,5 +23,17 @@ export class AccountController {
     } else {
       res.send(this.returnService.wrapReturn(false, null, 10001));
     }
+  }
+
+  @Post('signUp')
+  async signUp(
+    @Body() registerDto: RegisterDto,
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<void> {
+    const returnDto = await this.accountService.signUp(registerDto);
+    if (returnDto.errorCode === 0) {
+      res.cookie('id', returnDto.data, { httpOnly: true });
+    }
+    res.send(returnDto);
   }
 }
