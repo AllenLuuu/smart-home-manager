@@ -8,7 +8,10 @@ import {
   HStack,
   Input,
   Link,
+  FormControl,
+  FormErrorMessage,
 } from "@chakra-ui/react";
+import { equals, ifElse } from "ramda";
 import { useState } from "react";
 import login from "../util/login";
 
@@ -24,10 +27,37 @@ export default function Login() {
     setPassword(event.target.value);
   };
 
+  const [isUsernameEmpty, setUsernameEmpty] = useState(false);
+  const [isPasswordEmpty, setPasswordEmpty] = useState(false);
+
+  const validate = () => {
+    let isValid = true;
+    ifElse(
+      equals(""),
+      () => {
+        setUsernameEmpty(true);
+        isValid = false;
+      },
+      () => setUsernameEmpty(false)
+    )(username);
+    ifElse(
+      equals(""),
+      () => {
+        setPasswordEmpty(true);
+        isValid = false;
+      },
+      () => setPasswordEmpty(false)
+    )(password);
+
+    return isValid;
+  };
+
   const handleLogin = async () => {
-    const canLogin = await login(username, password);
-    if (canLogin) {
-      console.log("Logged in!");
+    if (validate()) {
+      const canLogin = await login(username, password);
+      if (canLogin) {
+        console.log("Logged in!");
+      }
     }
   };
 
@@ -48,19 +78,30 @@ export default function Login() {
 
         <VStack spacing="10px" p="25px" mt="25px" align="flex-start">
           <Text fontSize="lg"> 用户名 </Text>
-          <Input
-            placeholder="请输入用户名"
-            value={username}
-            onChange={handleUsernameChange}
-          />
-          <div></div>
+          <FormControl isInvalid={isUsernameEmpty}>
+            <Input
+              placeholder="请输入用户名"
+              value={username}
+              onChange={handleUsernameChange}
+            />
+            {isUsernameEmpty && (
+              <FormErrorMessage>用户名不能为空</FormErrorMessage>
+            )}
+          </FormControl>
+          {!isUsernameEmpty && <div></div>}
+
           <Text fontSize="lg"> 密码 </Text>
-          <Input
-            type="password"
-            placeholder="请输入密码"
-            value={password}
-            onChange={handlePasswordChange}
-          />
+          <FormControl isInvalid={isPasswordEmpty}>
+            <Input
+              type="password"
+              placeholder="请输入密码"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+            {isPasswordEmpty && (
+              <FormErrorMessage>密码不能为空</FormErrorMessage>
+            )}
+          </FormControl>
         </VStack>
 
         <HStack p="25px" mt={50} spacing="50px">
