@@ -28,7 +28,8 @@ export default function Login() {
   const login = async () => {
     try {
       const loggedIn = await request.login(username, password);
-      if (loggedIn.data === true) {
+      console.log(loggedIn.data);
+      if (loggedIn.data.errorCode === 0) {
         toast({
           title: "Logged in successfully",
           status: "success",
