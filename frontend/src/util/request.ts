@@ -38,7 +38,8 @@ export const ping = async () => {
 
 const showError = (task: string, errorMessage: string) => {
   window.$toast({
-    title: `${task}失败：${errorMessage}`,
+    title: `${task}失败`,
+    description: errorMessage,
     status: "error",
     duration: 2000,
     isClosable: true,
