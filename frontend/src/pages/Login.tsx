@@ -7,12 +7,12 @@ import {
   VStack,
   HStack,
   Input,
-  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import request from "../util/request";
+import login from "../util/login";
 
 export default function Login() {
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,37 +24,10 @@ export default function Login() {
     setPassword(event.target.value);
   };
 
-  const toast = useToast();
-  const login = async () => {
-    try {
-      const loggedIn = await request.login(username, password);
-      console.log(loggedIn.data);
-      if (loggedIn.data.errorCode === 0) {
-        toast({
-          title: "Logged in successfully",
-          status: "success",
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-        });
-      } else {
-        toast({
-          title: "登录失败：用户名或密码错误",
-          status: "error",
-          duration: 2000,
-          isClosable: true,
-          position: "top",
-        });
-      }
-    } catch (error) {
-      toast({
-        title: "登陆失败：网络连接出错",
-        status: "error",
-        duration: 2000,
-        isClosable: true,
-        position: "top",
-      });
-      console.error(error);
+  const handleLogin = async () => {
+    const canLogin = await login(username, password);
+    if (canLogin) {
+      console.log("Logged in!");
     }
   };
 
@@ -91,7 +64,7 @@ export default function Login() {
         </VStack>
 
         <HStack p="25px" spacing="50px">
-          <Button colorScheme="blue" size="lg" flexGrow="1" onClick={login}>
+          <Button colorScheme="blue" size="lg" flexGrow="1" onClick={handleLogin}>
             登录
           </Button>
           <Button colorScheme="blue" variant="outline" size="lg" flexGrow="1">

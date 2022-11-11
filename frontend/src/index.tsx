@@ -1,22 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { ChakraProvider } from "@chakra-ui/react";
-import Login from "./pages/Login";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Login />,
-  },
-]);
+import App from "./App";
 
 ReactDOM.createRoot(document.getElementById("root") as Element).render(
   <React.StrictMode>
     <ChakraProvider>
-      <RouterProvider router={router} />
+      <App />
     </ChakraProvider>
   </React.StrictMode>
 );
