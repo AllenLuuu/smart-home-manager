@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useState } from "react";
-import { both, compose, equals, flip, gte, ifElse, inc, not } from "ramda";
+import { both, compose, equals, flip, gte, ifElse, not, prop } from "ramda";
 import signUp from "../util/signUp";
 
 export default function SignUp() {
@@ -95,7 +95,7 @@ export default function SignUp() {
       }
     )(password2);
     ifElse(
-      compose(flip(gte)(6), (x: string) => x.length),
+      compose(flip(gte)(6), prop("length")),
       () => setPasswordValid(true),
       () => {
         setPasswordValid(false);
@@ -104,7 +104,7 @@ export default function SignUp() {
     )(password);
     ifElse(
       both(
-        compose(equals(11), (x: string) => x.length),
+        compose(equals(11), prop("length")),
         compose(not, isNaN, (x: string) => +x)
       ),
       () => setPhoneValid(true),
