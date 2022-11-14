@@ -18,7 +18,7 @@ export class AccountController {
   ): Promise<void> {
     const id = await this.accountService.login(loginDto);
     if (id) {
-      res.cookie('id', id, { httpOnly: true });
+      res.cookie('id', id, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7 });
       res.send(this.returnService.wrapReturn(true, null));
     } else {
       res.send(this.returnService.wrapReturn(false, null, 10001));
@@ -32,7 +32,7 @@ export class AccountController {
   ): Promise<void> {
     const returnDto = await this.accountService.signUp(registerDto);
     if (returnDto.errorCode === 0) {
-      res.cookie('id', returnDto.data, { httpOnly: true });
+      res.cookie('id', returnDto.data, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7 });
     }
     res.send(returnDto);
   }
