@@ -18,9 +18,12 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { both, compose, equals, flip, gte, ifElse, not, prop } from "ramda";
 import signUp from "../util/signUp";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const toast = useToast();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
@@ -124,11 +127,11 @@ export default function SignUp() {
       if (signedUp) {
         toast({
           title: "注册成功！",
-          description: "您已成功注册，现在可以登录了。",
           status: "success",
           duration: 5000,
           isClosable: true,
         });
+        navigate("/site-list");
       }
     }
   };

@@ -14,9 +14,12 @@ import {
 } from "@chakra-ui/react";
 import { equals, ifElse } from "ramda";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import login from "../util/login";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -57,7 +60,7 @@ export default function Login() {
     if (validate()) {
       const canLogin = await login(username, password);
       if (canLogin) {
-        console.log("Logged in!");
+        navigate("/site-list");
       }
     }
   };
