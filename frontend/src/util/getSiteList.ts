@@ -7,7 +7,7 @@ export default async function getSiteList(searchText: string) {
       {
         searchText,
       },
-      "获取站点列表"
+      "获取场景列表"
     );
     return response.data;
   } catch (error: any) {
