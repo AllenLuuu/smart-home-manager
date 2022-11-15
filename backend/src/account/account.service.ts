@@ -3,14 +3,12 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Account, AccountDocument } from './schemas/account.schema';
 import { LoginDto, RegisterDto } from './dto/account.dto';
-import { ReturnService } from 'src/return/return.service';
 import { WrongRequestException } from 'src/wrong-request.exception';
 
 @Injectable()
 export class AccountService {
   constructor(
     @InjectModel(Account.name) private accountModel: Model<AccountDocument>,
-    private readonly returnService: ReturnService,
   ) {}
 
   async login(loginDto: LoginDto): Promise<string> {

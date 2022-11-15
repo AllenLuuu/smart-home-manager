@@ -3,7 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AccountModule } from './account/account.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ReturnModule } from './return/return.module';
 import dbConfig from './dbconfig';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { WrongRequestExceptionFilter } from './wrong-request-exception.filter';
@@ -11,7 +10,7 @@ import { ReturnInterceptor } from './return.interceptor';
 import { SiteModule } from './site/site.module';
 
 @Module({
-  imports: [ MongooseModule.forRoot(dbConfig.uri), AccountModule, ReturnModule, SiteModule],
+  imports: [ MongooseModule.forRoot(dbConfig.uri), AccountModule, SiteModule],
   controllers: [AppController],
   providers: [AppService, {
     provide: APP_FILTER,
