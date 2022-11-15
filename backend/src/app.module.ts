@@ -11,7 +11,7 @@ import { ReturnInterceptor } from './return.interceptor';
 import { SiteModule } from './site/site.module';
 
 @Module({
-  imports: [ MongooseModule.forRoot(dbConfig.uri) , AccountModule, ReturnModule, SiteModule],
+  imports: [ MongooseModule.forRoot(dbConfig.uri), AccountModule, ReturnModule, SiteModule],
   controllers: [AppController],
   providers: [AppService, {
     provide: APP_FILTER,
