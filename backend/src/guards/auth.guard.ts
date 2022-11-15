@@ -10,10 +10,10 @@ export class AuthGuard implements CanActivate {
     @InjectModel(Account.name) private accountModal: Model<AccountDocument>,
   ) {}
 
-  canActivate(context: ExecutionContext): boolean | Promise<boolean> {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
     const id = request.cookies.id;
-    const user = this.accountModal.findById(id);
+    const user = await this.accountModal.findById(id);
 
     if (user) {
       return true;
