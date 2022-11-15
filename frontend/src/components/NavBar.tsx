@@ -1,5 +1,13 @@
 import { AddIcon, ArrowBackIcon } from "@chakra-ui/icons";
-import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Flex,
+  Grid,
+  GridItem,
+  IconButton,
+  Text,
+} from "@chakra-ui/react";
 import { LogOutOutline } from "@ricons/ionicons5";
 import { equals, ifElse } from "ramda";
 import { useNavigate } from "react-router-dom";
@@ -7,42 +15,58 @@ import { useNavigate } from "react-router-dom";
 export default function NavBar({
   name,
   children,
-  addAction,
   backAction,
+  showAdd,
+  addAction,
 }: {
   name: string;
   children: React.ReactNode;
-  addAction: () => void;
   backAction?: () => void;
+  showAdd?: boolean;
+  addAction?: () => void;
 }) {
   const navigate = useNavigate();
 
   return (
     <>
       <Flex minHeight="100vh" direction="column" px={25}>
-        <Flex justify="space-between" py="20px">
-          <IconButton
-            aria-label="log out"
-            colorScheme="blue"
-            variant="ghost"
-            fontSize={30}
-            icon={ifElse(
-              equals("场景列表"),
-              () => <LogOutOutline />,
-              () => <ArrowBackIcon />
-            )(name)}
-            onClick={backAction ?? (() => navigate(-1))}
-          />
-          <Text fontSize="2xl">{name}</Text>
-          <IconButton
-            aria-label="create"
-            colorScheme="blue"
-            variant="ghost"
-            fontSize={30}
-            icon={<AddIcon />}
-            onClick={addAction}
-          />
-        </Flex>
+        <Grid templateColumns="repeat(5, 1fr)" py="20px" mb="20px">
+          <GridItem colSpan={1}>
+            <Flex h="100%" justify={"flex-start"} align="center">
+              <IconButton
+                aria-label="log out"
+                colorScheme="blue"
+                variant="ghost"
+                fontSize={30}
+                icon={ifElse(
+                  equals("场景列表"),
+                  () => <LogOutOutline />,
+                  () => <ArrowBackIcon />
+                )(name)}
+                onClick={backAction ?? (() => navigate(-1))}
+              />
+            </Flex>
+          </GridItem>
+          <GridItem colSpan={3}>
+            <Center height="100%">
+              <Text fontSize="2xl">{name}</Text>
+            </Center>
+          </GridItem>
+          {showAdd ? (
+            <GridItem colSpan={1}>
+              <Flex h="100%" justify={"flex-end"} align="center">
+                <IconButton
+                  aria-label="create"
+                  colorScheme="blue"
+                  variant="ghost"
+                  fontSize={30}
+                  icon={<AddIcon />}
+                  onClick={addAction}
+                />
+              </Flex>
+            </GridItem>
+          ) : null}
+        </Grid>
         <Box flexGrow={1}>{children}</Box>
       </Flex>
     </>
