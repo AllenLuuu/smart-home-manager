@@ -131,7 +131,7 @@ export default function SignUp() {
           duration: 5000,
           isClosable: true,
         });
-        navigate("/site-list");
+        navigate("/site/list");
       }
     }
   };

@@ -60,7 +60,7 @@ export default function Login() {
     if (validate()) {
       const canLogin = await login(username, password);
       if (canLogin) {
-        navigate("/site-list");
+        navigate("/site/list");
       }
     }
   };
