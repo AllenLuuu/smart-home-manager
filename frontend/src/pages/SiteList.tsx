@@ -12,9 +12,9 @@ export default function SiteList() {
     setSiteList(list);
   }
 
-  // useEffect(() => {
-  //   getList("");
-  // }, []);
+  useEffect(() => {
+    getList("");
+  }, []);
 
   return (
     <>
