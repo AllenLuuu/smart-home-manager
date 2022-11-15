@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { Account, AccountDocument } from './schemas/account.schema';
 import { LoginDto, RegisterDto } from './dto/account.dto';
 import { ReturnService } from 'src/return/return.service';
-import { ReturnDto } from 'src/return/return.dto';
+import { WrongRequestException } from 'src/wrong-request.exception';
 
 @Injectable()
 export class AccountService {
@@ -13,27 +13,27 @@ export class AccountService {
     private readonly returnService: ReturnService,
   ) {}
 
-  async login(loginDto: LoginDto): Promise<string | null> {
+  async login(loginDto: LoginDto): Promise<string> {
     const account = await this.accountModel.findOne({ username: loginDto.username });
     if (account) {
       if (account.password === loginDto.password) {
         return account.id;
       }
     }
-    return null;
+    throw new WrongRequestException(10001);
   }
 
-  async signUp(registerDto: RegisterDto): Promise<ReturnDto<any>> {
+  async signUp(registerDto: RegisterDto): Promise<string> {
     const checkUsername = await this.accountModel.findOne({ username: registerDto.username });
     if (checkUsername) {
-      return this.returnService.wrapReturn(false, null, 10002);
+      throw new WrongRequestException(10002);
     }
     const checkPhone = await this.accountModel.findOne({ phone: registerDto.phone });
     if (checkPhone) {
-      return this.returnService.wrapReturn(false, null, 10003);
+      throw new WrongRequestException(10003);
     }
 
     const createdAccount = await this.accountModel.create(registerDto);
-    return this.returnService.wrapReturn(true, createdAccount.id);
+    return createdAccount.id;
   }
 }
