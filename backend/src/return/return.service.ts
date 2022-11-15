@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ReturnDto } from './return.dto';
-import errorMsg from './errorMsg';
+import errorMsg from '../errorMsg';
 
 @Injectable()
 export class ReturnService {
