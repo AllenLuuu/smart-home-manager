@@ -1,3 +1,3 @@
-export class AccountListDto {
+export class SiteListDto {
     searchText: string;
 }
