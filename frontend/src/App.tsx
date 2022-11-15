@@ -2,6 +2,7 @@ import { useToast } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import SiteAdd from "./pages/SiteAdd";
 import SiteList from "./pages/SiteList";
 
 const router = createBrowserRouter([
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: "/site/list",
     element: <SiteList />,
+  },
+  {
+    path: "/site/add",
+    element: <SiteAdd />,
   }
 ]);
 
