@@ -17,7 +17,7 @@ import {
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { both, compose, equals, flip, gte, ifElse, not, prop } from "ramda";
-import signUp from "../util/signUp";
+import signUp from "../util/account/signUp";
 import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {

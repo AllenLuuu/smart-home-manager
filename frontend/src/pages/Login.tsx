@@ -15,7 +15,7 @@ import {
 import { equals, ifElse } from "ramda";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import login from "../util/login";
+import login from "../util/account/login";
 
 export default function Login() {
   const navigate = useNavigate();

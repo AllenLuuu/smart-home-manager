@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import CList from "../components/CList";
 import NavBar from "../components/NavBar";
 import SearchBox from "../components/SearchBox";
-import logout from "../util/logout";
-import getSiteList from "../util/getSiteList";
+import logout from "../util/account/logout";
+import getSiteList from "../util/site/getSiteList";
 
 export default function SiteList() {
   const navigate = useNavigate();

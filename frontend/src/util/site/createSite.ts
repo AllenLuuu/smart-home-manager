@@ -1,4 +1,4 @@
-import { post } from "./request";
+import { post } from "../request";
 
 export default async function createSite(name: string) {
   try {

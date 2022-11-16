@@ -1,4 +1,4 @@
-import { post } from "./request";
+import { post } from "../request";
 
 export default async function login(username: string, password: string) {
   try {
