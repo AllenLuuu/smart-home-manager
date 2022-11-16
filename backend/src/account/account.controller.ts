@@ -28,4 +28,12 @@ export class AccountController {
     res.cookie('id', id, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7 });
     return true;
   }
+
+  @Post('logout')
+  async logout(
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<true> {
+    res.clearCookie('id');
+    return true;
+  }
 }

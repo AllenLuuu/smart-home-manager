@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CList from "../components/CList";
 import NavBar from "../components/NavBar";
 import SearchBox from "../components/SearchBox";
-import { removeCookie } from "../util/cookie";
+import logout from "../util/logout";
 import getSiteList from "../util/getSiteList";
 
 export default function SiteList() {
@@ -18,9 +18,11 @@ export default function SiteList() {
 
   const {isOpen, onOpen, onClose} = useDisclosure();
   const cancelRef = useRef<HTMLButtonElement>();
-  function logout() {
-    removeCookie("id");
-    navigate("/");
+  async function exit() {
+    const loggedOut = await logout();
+    if(loggedOut) {
+      navigate("/");
+    }
   }
 
   useEffect(() => {
@@ -49,7 +51,7 @@ export default function SiteList() {
               <Button ref={cancelRef as React.MutableRefObject<HTMLButtonElement>} onClick={onClose}>
                 取消
               </Button>
-              <Button colorScheme="red" onClick={logout} ml={3}>
+              <Button colorScheme="red" onClick={exit} ml={3}>
                 登出
               </Button>
             </AlertDialogFooter>
