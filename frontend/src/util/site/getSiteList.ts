@@ -1,6 +1,6 @@
 import { post } from "../request";
 
-export default async function getSiteList(searchText: string) {
+export default async function getSiteList(searchText: string): Promise<Site[]> {
   try {
     const response = await post(
       "/site/list",

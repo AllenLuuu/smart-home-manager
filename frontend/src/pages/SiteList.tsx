@@ -9,7 +9,7 @@ import getSiteList from "../util/site/getSiteList";
 
 export default function SiteList() {
   const navigate = useNavigate();
-  const [SiteList, setSiteList] = useState([]);
+  const [SiteList, setSiteList] = useState<Site[]>([]);
 
   async function getList(searchText: string) {
     const list = await getSiteList(searchText);
