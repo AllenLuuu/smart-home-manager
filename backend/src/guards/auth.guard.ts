@@ -7,13 +7,13 @@ import { WrongRequestException } from 'src/wrong-request.exception';
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
-    @InjectModel(Account.name) private accountModal: Model<AccountDocument>,
+    @InjectModel(Account.name) private accountModel: Model<AccountDocument>,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
     const id = request.cookies.id;
-    const user = await this.accountModal.findById(id);
+    const user = await this.accountModel.findById(id);
 
     if (user) {
       return true;

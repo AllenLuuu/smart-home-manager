@@ -6,10 +6,10 @@ import { Site, SiteDocument } from './schemas/site.schema';
 
 @Injectable()
 export class SiteService {
-  constructor(@InjectModel(Site.name) private siteModal: Model<SiteDocument>) {}
+  constructor(@InjectModel(Site.name) private siteModel: Model<SiteDocument>) {}
 
   async list(searchText: string, host: string): Promise<SiteDocument[]> {
-    const sites = await this.siteModal.find({
+    const sites = await this.siteModel.find({
       host,
       name: { $regex: searchText, $options: 'i' },
     });
@@ -17,11 +17,11 @@ export class SiteService {
   }
 
   async create(name: string, host: string): Promise<boolean> {
-    const site = await this.siteModal.findOne({ name, host });
+    const site = await this.siteModel.findOne({ name, host });
     if (site) {
       throw new WrongRequestException(30001);
     } else {
-      await this.siteModal.create({ name, host, rooms: [] });
+      await this.siteModel.create({ name, host, rooms: [] });
       return true;
     }
   }
