@@ -8,9 +8,10 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { WrongRequestExceptionFilter } from './wrong-request-exception.filter';
 import { ReturnInterceptor } from './return.interceptor';
 import { SiteModule } from './site/site.module';
+import { RoomModule } from './room/room.module';
 
 @Module({
-  imports: [ MongooseModule.forRoot(dbConfig.uri), AccountModule, SiteModule],
+  imports: [ MongooseModule.forRoot(dbConfig.uri), AccountModule, SiteModule, RoomModule],
   controllers: [AppController],
   providers: [AppService, {
     provide: APP_FILTER,

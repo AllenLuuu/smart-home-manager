@@ -6,10 +6,13 @@ import NavBar from "../components/NavBar";
 import SearchBox from "../components/SearchBox";
 import logout from "../util/account/logout";
 import getSiteList from "../util/site/getSiteList";
+import { useCurrentSiteStore } from "../store";
 
 export default function SiteList() {
   const navigate = useNavigate();
   const [SiteList, setSiteList] = useState<Site[]>([]);
+
+  const setCurrentSite = useCurrentSiteStore((state) => state.setCurrentSite);
 
   async function getList(searchText: string) {
     const list = await getSiteList(searchText);
@@ -29,11 +32,16 @@ export default function SiteList() {
     getList("");
   }, []);
 
+  const toRoomList = (site: Site) => {
+    setCurrentSite(site);
+    navigate("/room/list");
+  }
+
   return (
     <>
       <NavBar name="场景列表" backAction={onOpen} showAdd addAction={() => navigate("/site/add")}>
         <SearchBox placeholder="搜索场景" search={getList}></SearchBox>
-        <CList list={SiteList} keyProp={"name"} action={() => {}} />
+        <CList list={SiteList} keyProp={"name"} action={toRoomList} />
       </NavBar>
 
       <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef as React.MutableRefObject<HTMLButtonElement>} onClose={onClose}>
