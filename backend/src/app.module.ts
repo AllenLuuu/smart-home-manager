@@ -9,9 +9,10 @@ import { WrongRequestExceptionFilter } from './wrong-request-exception.filter';
 import { ReturnInterceptor } from './return.interceptor';
 import { SiteModule } from './site/site.module';
 import { RoomModule } from './room/room.module';
+import { DeviceModule } from './device/device.module';
 
 @Module({
-  imports: [ MongooseModule.forRoot(dbConfig.uri), AccountModule, SiteModule, RoomModule],
+  imports: [ MongooseModule.forRoot(dbConfig.uri), AccountModule, SiteModule, RoomModule, DeviceModule],
   controllers: [AppController],
   providers: [AppService, {
     provide: APP_FILTER,

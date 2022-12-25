@@ -1,14 +1,14 @@
 import { post } from "../request";
 
-export default async function getRoomList(siteId: string, searchText: string): Promise<Room[]> {
+export default async function getDeviceList(roomId: string, searchText: string): Promise<Device[]> {
   try {
     const response = await post(
-      "/room/list",
+      "/device/list",
       {
-        siteId,
+        roomId,
         searchText,
       },
-      "获取房间列表"
+      "获取设备列表"
     );
     return response.data;
   } catch (error: any) {

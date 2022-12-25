@@ -24,6 +24,16 @@ export class RoomService {
     return rooms;
   }
 
+  async get(siteId: string, roomId: string): Promise<RoomDocument> {
+    const site = await this.siteModel.findById(siteId);
+    if (!site) throw new WrongRequestException(30002);
+
+    const room = await this.roomModel.findById(roomId);
+    if (!room) throw new WrongRequestException(40002);
+
+    return room;
+  }
+
   async create(
     siteId: string,
     name: string,

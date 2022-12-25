@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards} from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { Cookies } from 'src/cookie.decorator';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { RoomCreateDto, RoomListDto } from './dto/room.dto';
@@ -11,9 +11,7 @@ export class RoomController {
   constructor(private readonly roomService: RoomService) {}
 
   @Post('list')
-  async list(
-    @Body() roomListDto: RoomListDto,
-  ): Promise<RoomDocument[]> {
+  async list(@Body() roomListDto: RoomListDto): Promise<RoomDocument[]> {
     return this.roomService.list(roomListDto.siteId, roomListDto.searchText);
   }
 
@@ -22,6 +20,11 @@ export class RoomController {
     @Cookies('id') id: string,
     @Body() roomCreateDto: RoomCreateDto,
   ): Promise<boolean> {
-    return this.roomService.create(roomCreateDto.siteId, roomCreateDto.name, roomCreateDto.picture, id);
+    return this.roomService.create(
+      roomCreateDto.siteId,
+      roomCreateDto.name,
+      roomCreateDto.picture,
+      id,
+    );
   }
 }

@@ -20,6 +20,9 @@ export class Room extends Document {
   })
   devices: string[];
 
+  @Prop({
+    required: false,
+  })
   picture: string;
 }
 

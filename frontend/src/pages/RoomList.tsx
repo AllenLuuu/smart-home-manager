@@ -4,13 +4,14 @@ import CList from "../components/CList";
 import NavBar from "../components/NavBar";
 import SearchBox from "../components/SearchBox";
 import getRoomList from "../util/room/getRoomList";
-import { useCurrentSiteStore } from "../store/index";
+import { useCurrentRoomStore, useCurrentSiteStore } from "../store/index";
 
 export default function RoomList() {
   const navigate = useNavigate();
   const [RoomList, setRoomList] = useState<Room[]>([]);
 
   const currentSite = useCurrentSiteStore((state) => state.currentSite)!;
+  const setCurrentRoom = useCurrentRoomStore((state) => state.setCurrentRoom);
 
   async function getList(searchText:string) {
     const list = await getRoomList(currentSite._id, searchText);
@@ -22,6 +23,7 @@ export default function RoomList() {
   }, []);
 
   const toRoom = (room: Room) => {
+    setCurrentRoom(room);
     navigate(`/room/${room.name}`);
   }
 

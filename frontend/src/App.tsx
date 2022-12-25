@@ -1,6 +1,8 @@
 import { useToast } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import DeviceAdd from "./pages/DeviceAdd";
 import Login from "./pages/Login";
+import Room from "./pages/Room";
 import RoomAdd from "./pages/RoomAdd";
 import RoomList from "./pages/RoomList";
 import SignUp from "./pages/SignUp";
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
     path: "/room/add",
     element: <RoomAdd />,
   },
+  {
+    path: "/room/:roomId",
+    element: <Room />,
+  },
+  {
+    path: "/device/add",
+    element: <DeviceAdd />,
+  }
 ]);
 
 export default function App() {
