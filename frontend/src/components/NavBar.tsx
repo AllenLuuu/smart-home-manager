@@ -8,7 +8,7 @@ import {
   IconButton,
   Text,
 } from "@chakra-ui/react";
-import { LogOutOutline } from "@ricons/ionicons5";
+import { LogOutSharp } from "@ricons/material";
 import { equals, ifElse } from "ramda";
 import { useNavigate } from "react-router-dom";
 
@@ -40,7 +40,7 @@ export default function NavBar({
                 fontSize={30}
                 icon={ifElse(
                   equals("场景列表"),
-                  () => <LogOutOutline />,
+                  () => <LogOutSharp />,
                   () => <ArrowBackIcon />
                 )(name)}
                 onClick={backAction ?? (() => navigate(-1))}
