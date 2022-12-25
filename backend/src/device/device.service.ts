@@ -21,7 +21,18 @@ export class DeviceService {
     const ifMacth = (device: DeviceDocument) =>
       device.name.includes(searchText);
     const rawDevices = await Promise.all(map(getDevice)(room.devices));
-    const devices = rawDevices.filter(ifMacth);
+    let devices = rawDevices.filter(ifMacth);
+    devices.map((device) => {
+      if (device.type === 'sensor') {
+        device.states.value =
+          Math.floor(
+            Math.random() * (device.states.max - device.states.min + 1),
+          ) + device.states.min;
+      } else if (device.type === 'lock') {
+        device.states.isLocked = Math.random() > 0.5;
+      }
+    });
+
     return devices;
   }
 
