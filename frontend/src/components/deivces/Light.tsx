@@ -1,6 +1,5 @@
 import {
   HStack,
-  VStack,
   Text,
   Switch,
   Slider,

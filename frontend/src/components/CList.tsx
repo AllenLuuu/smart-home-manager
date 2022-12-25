@@ -1,5 +1,4 @@
 import { List } from "@chakra-ui/react";
-import deleteSite from "../util/site/deleteSite";
 import CListItem from "./CListItem";
 
 export default function CList({
