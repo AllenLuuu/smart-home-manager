@@ -5,6 +5,7 @@ import DeviceItem from "../components/DeviceItem";
 import NavBar from "../components/NavBar";
 import SearchBox from "../components/SearchBox";
 import { useCurrentRoomStore } from "../store";
+import deleteDevice from "../util/device/deleteDevice";
 import getDeviceList from "../util/device/getDeviceList";
 
 export default function Room() {
@@ -36,6 +37,10 @@ export default function Room() {
             <DeviceItem
               device={device}
               key={device._id}
+              deleteDevice={async (id) => {
+                await deleteDevice(currentRoom._id, id);
+                getList("");
+              }}
               refreshList={() => getList("")}
             />
           ))}

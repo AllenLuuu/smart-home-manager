@@ -7,6 +7,7 @@ import {
   SliderFilledTrack,
   SliderThumb,
   SliderTrack,
+  Box,
 } from "@chakra-ui/react";
 
 export default function Light({
@@ -31,6 +32,7 @@ export default function Light({
           }}
         />
       </HStack>
+      <Box h={2} />
       <HStack justify="space-between">
         <Text overflow="hidden" whiteSpace="nowrap">
           亮度

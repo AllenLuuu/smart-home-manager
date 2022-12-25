@@ -19,3 +19,8 @@ export class DeviceUpdateDto {
   id: string;
   states: any;
 }
+
+export class DeviceDeleteDto {
+  roomId: string;
+  deviceId: string;
+}

@@ -104,4 +104,15 @@ export class DeviceService {
     await device.save();
     return true;
   }
+
+  async delete(roomId: string, deviceId: string): Promise<boolean> {
+    const room = await this.roomModel.findById(roomId);
+    if (!room) throw new WrongRequestException(40002);
+    const device = await this.deviceModel.findById(deviceId);
+    if (!device) throw new WrongRequestException(50002);
+    room.devices = room.devices.filter((id) => id !== deviceId);
+    await room.save();
+    await device.remove();
+    return true;
+  }
 }
