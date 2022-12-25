@@ -41,6 +41,7 @@ export default function Light({
             onLuminanceChange(e);
           }}
           width="70%"
+          isDisabled={!isOn}
         >
           <SliderTrack>
             <SliderFilledTrack />
