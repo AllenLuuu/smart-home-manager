@@ -1,7 +1,7 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { Cookies } from 'src/cookie.decorator';
 import { AuthGuard } from 'src/guards/auth.guard';
-import { RoomCreateDto, RoomListDto } from './dto/room.dto';
+import { RoomCreateDto, RoomDeleteDto, RoomListDto } from './dto/room.dto';
 import { RoomService } from './room.service';
 import { RoomDocument } from './schemas/room.schema';
 
@@ -26,5 +26,12 @@ export class RoomController {
       roomCreateDto.picture,
       id,
     );
+  }
+
+  @Post('delete')
+  async delete(
+    @Body() roomDeleteDto: RoomDeleteDto,
+  ): Promise<boolean> {
+    return this.roomService.delete(roomDeleteDto.siteId, roomDeleteDto.roomId);
   }
 }

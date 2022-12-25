@@ -57,4 +57,17 @@ export class RoomService {
       return true;
     }
   }
+
+  async delete(siteId: string, roomId: string): Promise<boolean> {
+    const site = await this.siteModel.findById(siteId);
+    if (!site) throw new WrongRequestException(30002);
+
+    const room = await this.roomModel.findById(roomId);
+    if (!room) throw new WrongRequestException(40002);
+
+    site.rooms = site.rooms.filter((id) => id !== roomId);
+    await site.save();
+    await room.remove();
+    return true;
+  }
 }

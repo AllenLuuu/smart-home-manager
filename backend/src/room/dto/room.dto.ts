@@ -8,3 +8,8 @@ export class RoomCreateDto {
   name: string;
   picture: string;
 }
+
+export class RoomDeleteDto {
+  siteId: string;
+  roomId: string;
+}

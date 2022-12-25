@@ -5,6 +5,7 @@ import NavBar from "../components/NavBar";
 import SearchBox from "../components/SearchBox";
 import getRoomList from "../util/room/getRoomList";
 import { useCurrentRoomStore, useCurrentSiteStore } from "../store/index";
+import deleteRoom from "../util/room/deleteRoom";
 
 export default function RoomList() {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function RoomList() {
   const currentSite = useCurrentSiteStore((state) => state.currentSite)!;
   const setCurrentRoom = useCurrentRoomStore((state) => state.setCurrentRoom);
 
-  async function getList(searchText:string) {
+  async function getList(searchText: string) {
     const list = await getRoomList(currentSite._id, searchText);
     setRoomList(list);
   }
@@ -25,7 +26,7 @@ export default function RoomList() {
   const toRoom = (room: Room) => {
     setCurrentRoom(room);
     navigate(`/room/${room.name}`);
-  }
+  };
 
   return (
     <>
@@ -36,7 +37,15 @@ export default function RoomList() {
         addAction={() => navigate("/room/add")}
       >
         <SearchBox placeholder="搜索场景" search={getList}></SearchBox>
-        <CList list={RoomList} keyProp={"name"} action={toRoom} />
+        <CList
+          list={RoomList}
+          keyProp={"name"}
+          action={toRoom}
+          deleteAction={async (id: string) => {
+            await deleteRoom(currentSite._id, id);
+            getList("");
+          }}
+        />
       </NavBar>
     </>
   );
