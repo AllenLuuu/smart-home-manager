@@ -25,4 +25,13 @@ export class SiteService {
       return true;
     }
   }
+
+  async delete(id: string): Promise<boolean> {
+    const site = await this.siteModel.findById(id);
+    if (!site) throw new WrongRequestException(30002);
+    await this.siteModel.deleteOne({
+      _id: id,
+    });
+    return true;
+  }
 }

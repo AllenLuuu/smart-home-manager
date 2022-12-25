@@ -25,4 +25,11 @@ export class SiteController {
   ): Promise<boolean> {
     return this.siteService.create(siteCreateDto.name, id);
   }
+
+  @Post('delete')
+  async delete(
+    @Body('id') siteId: string,
+  ): Promise<boolean> {
+    return this.siteService.delete(siteId);
+  }
 }

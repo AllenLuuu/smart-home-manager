@@ -7,6 +7,7 @@ import SearchBox from "../components/SearchBox";
 import logout from "../util/account/logout";
 import getSiteList from "../util/site/getSiteList";
 import { useCurrentSiteStore } from "../store";
+import deleteSite from "../util/site/deleteSite";
 
 export default function SiteList() {
   const navigate = useNavigate();
@@ -41,7 +42,10 @@ export default function SiteList() {
     <>
       <NavBar name="场景列表" backAction={onOpen} showAdd addAction={() => navigate("/site/add")}>
         <SearchBox placeholder="搜索场景" search={getList}></SearchBox>
-        <CList list={SiteList} keyProp={"name"} action={toRoomList} />
+        <CList list={SiteList} keyProp={"name"} action={toRoomList} deleteAction={async (id: string) => {
+          await deleteSite(id);
+          getList("");
+        }} />
       </NavBar>
 
       <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef as React.MutableRefObject<HTMLButtonElement>} onClose={onClose}>

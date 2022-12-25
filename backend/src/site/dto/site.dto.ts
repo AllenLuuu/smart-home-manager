@@ -5,3 +5,7 @@ export class SiteListDto {
 export class SiteCreateDto {
   name: string; 
 }
+
+export class SiteDeleteDto {
+  id: string;
+}
