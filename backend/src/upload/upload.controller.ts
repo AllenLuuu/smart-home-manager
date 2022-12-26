@@ -17,13 +17,11 @@ export class UploadController {
     FileInterceptor('file'),
   )
   async picture(@UploadedFile() file: any) {
-    console.log(file);
     return file.path;
   }
 
   @Post('picture/delete')
   async deletePicture(@Body("path") path: string) {
-    console.log(path);
     unlinkSync(path);
     return true;
   }

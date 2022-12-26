@@ -68,7 +68,6 @@ export default function RoomOverview() {
           <Stage width={window.innerWidth - 50} height={window.innerWidth - 50}>
             <Layer
               onTouchStart={(e) => {
-                console.log(e);
                 if (currentDevice) {
                   const x = e.evt.touches[0].clientX - 25;
                   const y = e.evt.touches[0].clientY - canvasRef.current?.offsetTop!;

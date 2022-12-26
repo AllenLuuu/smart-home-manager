@@ -8,7 +8,6 @@ export default async function setDeviceLocation(
   }
 ): Promise<boolean> {
   try {
-    console.log(id, location);
     await post(
       "/device/set-location",
       {
