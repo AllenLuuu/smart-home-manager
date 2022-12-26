@@ -13,6 +13,7 @@ export default function RoomList() {
 
   const currentSite = useCurrentSiteStore((state) => state.currentSite)!;
   const setCurrentRoom = useCurrentRoomStore((state) => state.setCurrentRoom);
+  const deleteCurrentSite = useCurrentSiteStore((state) => state.deleteCurrentSite);
 
   async function getList(searchText: string) {
     const list = await getRoomList(currentSite._id, searchText);
@@ -32,7 +33,10 @@ export default function RoomList() {
     <>
       <NavBar
         name="房间列表"
-        backAction={() => navigate("/site/list")}
+        backAction={() => {
+          deleteCurrentSite();
+          navigate("/site/list");
+        }}
         showAdd
         addAction={() => navigate("/room/add")}
       >

@@ -11,6 +11,9 @@ import getDeviceList from "../util/device/getDeviceList";
 export default function Room() {
   const navigate = useNavigate();
   const currentRoom = useCurrentRoomStore((state) => state.currentRoom)!;
+  const deleteCurrentRoom = useCurrentRoomStore(
+    (state) => state.deleteCurrentRoom
+  );
 
   const [deviceList, setDeviceList] = useState<Device[]>([]);
 
@@ -27,7 +30,10 @@ export default function Room() {
     <>
       <NavBar
         name={currentRoom.name}
-        backAction={() => navigate("/room/list")}
+        backAction={() => {
+          deleteCurrentRoom();
+          navigate("/room/list");
+        }}
         showAdd
         addAction={() => navigate("/device/add")}
         showEye
