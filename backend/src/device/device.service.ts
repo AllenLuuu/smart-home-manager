@@ -127,7 +127,6 @@ export class DeviceService {
     if (!device) throw new WrongRequestException(50002);
     device.location = location;
     await device.save();
-    console.log(device);
     return true;
   }
 }
