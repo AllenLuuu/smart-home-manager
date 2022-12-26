@@ -24,3 +24,11 @@ export class DeviceDeleteDto {
   roomId: string;
   deviceId: string;
 }
+
+export class DeviceLocationDto {
+  id: string;
+  location: {
+    x: number;
+    y: number;
+  };
+}

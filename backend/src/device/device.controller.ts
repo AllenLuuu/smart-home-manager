@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { Cookies } from 'src/cookie.decorator';
 import { DeviceService } from './device.service';
-import { DeviceCreateDto, DeviceDeleteDto, DeviceListDto, DeviceUpdateDto } from './dto/device.dto';
+import { DeviceCreateDto, DeviceDeleteDto, DeviceListDto, DeviceLocationDto, DeviceUpdateDto } from './dto/device.dto';
 import { DeviceDocument } from './schemas/device.schema';
 
 @Controller('device')
@@ -47,6 +47,16 @@ export class DeviceController {
     return this.deviceService.delete(
       deviceDeleteDto.roomId,
       deviceDeleteDto.deviceId,
+    );
+  }
+
+  @Post('set-location')
+  async location(
+    @Body() deviceLocationDto: DeviceLocationDto,
+  ): Promise<boolean> {
+    return this.deviceService.setDeviceLocation(
+      deviceLocationDto.id,
+      deviceLocationDto.location,
     );
   }
 }

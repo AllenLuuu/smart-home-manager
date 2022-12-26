@@ -115,4 +115,19 @@ export class DeviceService {
     await device.remove();
     return true;
   }
+
+  async setDeviceLocation(
+    id: string,
+    location: {
+      x: number;
+      y: number;
+    },
+  ): Promise<boolean> {
+    const device = await this.deviceModel.findById(id);
+    if (!device) throw new WrongRequestException(50002);
+    device.location = location;
+    await device.save();
+    console.log(device);
+    return true;
+  }
 }
