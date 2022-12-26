@@ -75,10 +75,10 @@ export default function RoomAdd() {
             flexGrow={1}
             w="100%"
           >
-            <Text fontSize="lg"> 场景名 </Text>
+            <Text fontSize="lg"> 房间名 </Text>
             <FormControl isInvalid={isNameEmpty}>
               <Input
-                placeholder="请输入场景名"
+                placeholder="请输入房间名"
                 value={name}
                 onChange={(e) => {
                   setName(e.target.value);
@@ -86,7 +86,7 @@ export default function RoomAdd() {
                 }}
               />
               {isNameEmpty ? (
-                <FormErrorMessage>场景名不能为空</FormErrorMessage>
+                <FormErrorMessage>房间名不能为空</FormErrorMessage>
               ) : null}
             </FormControl>
           </VStack>
