@@ -10,7 +10,7 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
+import { LegacyRef, useEffect, useRef, useState } from "react";
 import NavBar from "../components/NavBar";
 import { useCurrentRoomStore } from "../store";
 import { HamburgerIcon, AddIcon, EditIcon } from "@chakra-ui/icons";
@@ -18,7 +18,8 @@ import { useNavigate } from "react-router-dom";
 import DeviceMenu from "../components/DeviceMenu";
 import getDeviceList from "../util/device/getDeviceList";
 import setDeviceLocation from "../util/device/setDeviceLocation";
-import { Stage, Image as KImage, Layer, Text as KText } from "react-konva";
+import { Stage, Image as KImage, Layer, Text as KText} from "react-konva";
+import Konva from "konva";
 
 export default function RoomOverview() {
   const currentRoom = useCurrentRoomStore((state) => state.currentRoom)!;
@@ -26,6 +27,7 @@ export default function RoomOverview() {
   const [deviceList, setDeviceList] = useState<Device[]>([]);
   const [currentDevice, setCurrentDevice] = useState<Device | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const canvasRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     getDeviceList(currentRoom._id, "").then((list) => {
@@ -63,14 +65,15 @@ export default function RoomOverview() {
   return (
     <>
       <NavBar name={currentRoom.name} showAdd rightSlot={editMenu}>
-        <Center mb={100}>
+        <Center mb={100} ref={canvasRef}>
           <Stage width={window.innerWidth - 50} height={window.innerWidth - 50}>
             <Layer
-              onClick={(e) => {
+              onTouchStart={(e) => {
                 console.log(e);
                 if (currentDevice) {
-                  const x = e.evt.offsetX;
-                  const y = e.evt.offsetY;
+                  const x = e.evt.touches[0].clientX - 25;
+                  const y = e.evt.touches[0].clientY - canvasRef.current?.offsetTop!;
+                  console.log(x, y);
                   if (x < 0 || y < 0) return;
                   if (x > window.innerWidth - 50 || y > window.innerWidth - 50)
                     return;
