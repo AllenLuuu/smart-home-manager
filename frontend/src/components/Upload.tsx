@@ -1,6 +1,7 @@
 import { SmallAddIcon, SmallCloseIcon } from "@chakra-ui/icons";
 import { Flex, Input, Image, VStack, Button, HStack } from "@chakra-ui/react";
 import { useRef, useState } from "react";
+import uploadPicture from "../util/upload/uploadPicture";
 
 export default function Upload({
   setPicture,
@@ -10,22 +11,20 @@ export default function Upload({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = function() {
-        setPreview(this.result as string);
-        setPicture(this.result as string);
-      };
+      const pictureUrl = await uploadPicture(file);
+      console.log(pictureUrl);
+      setPicture(pictureUrl);
+      setPreview("http://localhost:3001/" + pictureUrl);
     }
   };
 
   return (
     <Flex direction="column" align="center" justify="center" my={10}>
-      <VStack>
-        <HStack justify="space-between">
+      <VStack align="flex-start">
+        <HStack w="calc(100vw - 50px)">
           <Button
             colorScheme="blue"
             variant="outline"
