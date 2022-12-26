@@ -40,7 +40,7 @@ export default function RoomList() {
         showAdd
         addAction={() => navigate("/room/add")}
       >
-        <SearchBox placeholder="搜索场景" search={getList}></SearchBox>
+        <SearchBox placeholder="搜索房间" search={getList}></SearchBox>
         <CList
           list={RoomList}
           keyProp={"name"}
