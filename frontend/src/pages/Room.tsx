@@ -30,6 +30,8 @@ export default function Room() {
         backAction={() => navigate("/room/list")}
         showAdd
         addAction={() => navigate("/device/add")}
+        showEye
+        eyeAction={() => navigate("/room/" + currentRoom.name + "/overview")}
       >
         <SearchBox placeholder="搜索设备" search={getList}></SearchBox>
         <Accordion allowMultiple>

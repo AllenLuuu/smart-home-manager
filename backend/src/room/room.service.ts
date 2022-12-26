@@ -24,16 +24,6 @@ export class RoomService {
     return rooms;
   }
 
-  async get(siteId: string, roomId: string): Promise<RoomDocument> {
-    const site = await this.siteModel.findById(siteId);
-    if (!site) throw new WrongRequestException(30002);
-
-    const room = await this.roomModel.findById(roomId);
-    if (!room) throw new WrongRequestException(40002);
-
-    return room;
-  }
-
   async create(
     siteId: string,
     name: string,
@@ -56,6 +46,15 @@ export class RoomService {
       await site.save();
       return true;
     }
+  }
+
+  async updatePicture(roomId: string, picture: string): Promise<boolean> {
+    const room = await this.roomModel.findById(roomId);
+    if (!room) throw new WrongRequestException(40002);
+
+    room.picture = picture;
+    await room.save();
+    return true;
   }
 
   async delete(siteId: string, roomId: string): Promise<boolean> {

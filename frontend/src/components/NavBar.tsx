@@ -18,6 +18,7 @@ export default function NavBar({
   children,
   backAction,
   showAdd,
+  rightSlot,
   addAction,
   showEye,
   eyeAction,
@@ -26,6 +27,7 @@ export default function NavBar({
   children: React.ReactNode;
   backAction?: () => void;
   showAdd?: boolean;
+  rightSlot?: React.ReactNode;
   addAction?: () => void;
   showEye?: boolean;
   eyeAction?: () => void;
@@ -54,7 +56,14 @@ export default function NavBar({
           </GridItem>
           <GridItem colSpan={3}>
             <Center height="100%">
-              <Text fontSize="2xl" overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">{name}</Text>
+              <Text
+                fontSize="2xl"
+                overflow="hidden"
+                textOverflow="ellipsis"
+                whiteSpace="nowrap"
+              >
+                {name}
+              </Text>
               {showEye ? (
                 <IconButton
                   aria-label="eye"
@@ -71,14 +80,16 @@ export default function NavBar({
           {showAdd ? (
             <GridItem colSpan={1}>
               <Flex h="100%" justify={"flex-end"} align="center">
-                <IconButton
-                  aria-label="create"
-                  colorScheme="blue"
-                  variant="ghost"
-                  fontSize={25}
-                  icon={<AddIcon />}
-                  onClick={addAction}
-                />
+                {rightSlot ?? (
+                  <IconButton
+                    aria-label="create"
+                    colorScheme="blue"
+                    variant="ghost"
+                    fontSize={25}
+                    icon={<AddIcon />}
+                    onClick={addAction}
+                  />
+                )}
               </Flex>
             </GridItem>
           ) : null}

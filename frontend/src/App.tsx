@@ -2,9 +2,11 @@ import { useToast } from "@chakra-ui/react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import DeviceAdd from "./pages/DeviceAdd";
 import Login from "./pages/Login";
+import PictureUpload from "./pages/PictureUpload";
 import Room from "./pages/Room";
 import RoomAdd from "./pages/RoomAdd";
 import RoomList from "./pages/RoomList";
+import RoomOverview from "./pages/RoomOverview";
 import SignUp from "./pages/SignUp";
 import SiteAdd from "./pages/SiteAdd";
 import SiteList from "./pages/SiteList";
@@ -35,8 +37,16 @@ const router = createBrowserRouter([
     element: <RoomAdd />,
   },
   {
-    path: "/room/:roomId",
+    path: "/room/:roomName",
     element: <Room />,
+  },
+  {
+    path: "/room/:roomName/overview",
+    element: <RoomOverview />,
+  },
+  {
+    path: "/room/:roomName/upload-picture",
+    element: <PictureUpload />,
   },
   {
     path: "/device/add",

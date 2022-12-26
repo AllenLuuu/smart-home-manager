@@ -9,6 +9,11 @@ export class RoomCreateDto {
   picture: string;
 }
 
+export class RoomUpdatePictureDto {
+  roomId: string;
+  picture: string;
+}
+
 export class RoomDeleteDto {
   siteId: string;
   roomId: string;
