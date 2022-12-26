@@ -35,7 +35,7 @@ export default function RoomOverview() {
   }, []);
 
   let img = new Image();
-  img.src = "http://localhost:3001/" + currentRoom.picture;
+  img.src = '/' + currentRoom.picture;
 
   const editMenu = (
     <Menu>

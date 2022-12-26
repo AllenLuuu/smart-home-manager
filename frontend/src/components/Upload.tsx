@@ -60,7 +60,7 @@ export default function Upload({
         />
         {preview && (
           <Image
-            src={"http://localhost:3001/" + preview}
+            src={'/' + preview}
             alt="preview"
             w="100%"
             h="100%"
