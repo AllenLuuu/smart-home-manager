@@ -5,10 +5,11 @@ import {
   Flex,
   Grid,
   GridItem,
+  Icon,
   IconButton,
   Text,
 } from "@chakra-ui/react";
-import { LogOutSharp } from "@ricons/material";
+import { LogOutSharp, RemoveRedEyeOutlined } from "@ricons/material";
 import { equals, ifElse } from "ramda";
 import { useNavigate } from "react-router-dom";
 
@@ -18,12 +19,16 @@ export default function NavBar({
   backAction,
   showAdd,
   addAction,
+  showEye,
+  eyeAction,
 }: {
   name: string;
   children: React.ReactNode;
   backAction?: () => void;
   showAdd?: boolean;
   addAction?: () => void;
+  showEye?: boolean;
+  eyeAction?: () => void;
 }) {
   const navigate = useNavigate();
 
@@ -49,7 +54,18 @@ export default function NavBar({
           </GridItem>
           <GridItem colSpan={3}>
             <Center height="100%">
-              <Text fontSize="2xl">{name}</Text>
+              <Text fontSize="2xl" overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">{name}</Text>
+              {showEye ? (
+                <IconButton
+                  aria-label="eye"
+                  variant="ghost"
+                  fontSize={25}
+                  colorScheme="blue"
+                  onClick={eyeAction}
+                >
+                  <Icon as={RemoveRedEyeOutlined} />
+                </IconButton>
+              ) : null}
             </Center>
           </GridItem>
           {showAdd ? (
@@ -59,7 +75,7 @@ export default function NavBar({
                   aria-label="create"
                   colorScheme="blue"
                   variant="ghost"
-                  fontSize={30}
+                  fontSize={25}
                   icon={<AddIcon />}
                   onClick={addAction}
                 />

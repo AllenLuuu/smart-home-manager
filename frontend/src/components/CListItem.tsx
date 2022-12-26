@@ -34,7 +34,7 @@ export default function CListItem({
       <Box mb="-1px">
         <Divider />
         <Flex justify="space-between">
-          <Box flexGrow={1} px={5} py={5} onClick={action}>
+          <Box flexGrow={1} px={5} py={5} onClick={action} overflow="hidden">
             {children}
           </Box>
           <Center px={5} py={5} onClick={onOpen}>
