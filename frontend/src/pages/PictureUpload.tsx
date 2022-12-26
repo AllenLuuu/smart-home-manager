@@ -1,21 +1,14 @@
 import {
   Flex,
-  FormControl,
-  FormErrorMessage,
-  VStack,
-  Input,
-  Text,
   Button,
   useToast,
 } from "@chakra-ui/react";
 import { ifElse, equals } from "ramda";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import create from "zustand";
 import NavBar from "../components/NavBar";
 import Upload from "../components/Upload";
-import { useCurrentRoomStore, useCurrentSiteStore } from "../store";
-import createRoom from "../util/room/createRoom";
+import { useCurrentRoomStore} from "../store";
 import updatePicture from "../util/room/updatePicture";
 
 export default function RoomAdd() {

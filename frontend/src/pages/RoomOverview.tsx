@@ -10,7 +10,7 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import { LegacyRef, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import NavBar from "../components/NavBar";
 import { useCurrentRoomStore } from "../store";
 import { HamburgerIcon, AddIcon, EditIcon } from "@chakra-ui/icons";
@@ -19,7 +19,6 @@ import DeviceMenu from "../components/DeviceMenu";
 import getDeviceList from "../util/device/getDeviceList";
 import setDeviceLocation from "../util/device/setDeviceLocation";
 import { Stage, Image as KImage, Layer, Text as KText} from "react-konva";
-import Konva from "konva";
 
 export default function RoomOverview() {
   const currentRoom = useCurrentRoomStore((state) => state.currentRoom)!;
