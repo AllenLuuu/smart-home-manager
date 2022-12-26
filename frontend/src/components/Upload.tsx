@@ -1,6 +1,7 @@
 import { SmallAddIcon, SmallCloseIcon } from "@chakra-ui/icons";
 import { Flex, Input, Image, VStack, Button, HStack } from "@chakra-ui/react";
 import { useRef, useState } from "react";
+import deletePicture from "../util/upload/deletePicture";
 import uploadPicture from "../util/upload/uploadPicture";
 
 export default function Upload({
@@ -17,7 +18,7 @@ export default function Upload({
       const pictureUrl = await uploadPicture(file);
       console.log(pictureUrl);
       setPicture(pictureUrl);
-      setPreview("http://localhost:3001/" + pictureUrl);
+      setPreview(pictureUrl);
     }
   };
 
@@ -38,7 +39,8 @@ export default function Upload({
             colorScheme="red"
             variant="outline"
             leftIcon={<SmallCloseIcon />}
-            onClick={() => {
+            onClick={async () => {
+              deletePicture(preview!);
               setPreview(null);
               setPicture("");
             }}
@@ -58,7 +60,7 @@ export default function Upload({
         />
         {preview && (
           <Image
-            src={preview}
+            src={"http://localhost:3001/" + preview}
             alt="preview"
             w="100%"
             h="100%"
