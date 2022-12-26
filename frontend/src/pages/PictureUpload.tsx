@@ -70,7 +70,6 @@ export default function RoomAdd() {
           flexDirection="column"
           justify="center"
           align="center"
-          mt={50}
         >
           <Upload setPicture={setPicture}></Upload>
 
